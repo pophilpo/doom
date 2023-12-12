@@ -98,7 +98,7 @@ Mostly making rustic buffers to my taste
 
 
 * Wakatime
-If I live 3 times longer than @sunsided, maybe I can catch up
+If I live 3 times longer than [[https://github.com/sunsided][@sunsided]], maybe I can catch up
 
 #+begin_src emacs-lisp
 (use-package! wakatime-mode
