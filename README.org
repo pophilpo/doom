@@ -1,0 +1,115 @@
+#+TITLE:  Emacs Config
+#+AUTHOR: Popov Philipp
+#+DESCRIPTION: Personal DoomEmacs config
+#+STARTUP: showeverything
+
+
+* Table of contents :toc:
+- [[#apperance][Apperance]]
+- [[#keybindings][Keybindings]]
+- [[#python][Python]]
+- [[#rust][Rust]]
+- [[#wakatime][Wakatime]]
+- [[#dashboard][Dashboard]]
+
+* Apperance
+Adjusting theme, fonts and other utils.
+
+#+begin_src emacs-lisp
+(setq doom-theme 'doom-peacock)
+(setq display-line-numbers-type 'relative)
+(setq doom-font (font-spec :family "UbuntuMono" :size 25 :weight 'medium))
+(setq org-pretty-entities t)
+#+end_src
+
+#+RESULTS:
+* Keybindings
+Most of the keybindings I use are default ones, but there are some exceptions.
+
+
+| COMMAND                   | DESCRIPTION                             | KEYBINDING |
+|---------------------------+-----------------------------------------+------------|
+| eshell                    | /Open terminal/                         | SPC o t    |
+| next-buffer               | /Switch to next buffer/                 | [tab]      |
+| previous-buffer           | /Switch to prev buffer/                 | [backtab]  |
+| poetry run /current_file/ | /Run current python file in poetry env/ | SPC c p    |
+| window-down               | /Select window down/                    | CTRL-j     |
+| window-up                 | /Select window up/                      | CTRL-k     |
+| window-left               | /Select window left/                    | CTRL-l     |
+| window-right              | /Select window right/                   | CTRL-r     |
+
+#+begin_src emacs-lisp
+(map! :leader
+      :desc "Terminal" "o t" #'eshell)
+
+(map! :n [tab] #'next-buffer
+      :n [backtab] #'previous-buffer)
+
+(map! :leader
+      :desc "Run Python script with Poetry" "c p" #'my/run-python-script-with-poetry)
+
+(map! :g "C-j" #'evil-window-down
+      :g "C-k" #'evil-window-up
+      :g "C-h" #'evil-window-left
+      :g "C-l" #'evil-window-right)
+
+(map! :after rustic
+      :map rustic-mode-map
+      :localleader
+      "b" #'rustic-cargo-build
+      "c" #'rustic-cargo-clippy
+      "t" #'rustic-cargo-test
+      "r" #'rustic-cargo-run)
+#+end_src
+
+* Python
+Setting ipython3 as default REPL and some extra settings for poetry
+#+begin_src emacs-lisp
+(use-package! poetry
+  :hook (python-mode . poetry-tracking-mode))
+
+(defun my/run-python-script-with-poetry ()
+  "Run current buffer's Python script with Poetry."
+  (interactive)
+  (compile (concat "poetry run python " (shell-quote-argument (buffer-file-name)))))
+
+(map! :leader
+      :desc "Run Python script with Poetry" "c p" #'my/run-python-script-with-poetry)
+
+
+
+(after! python
+  (setq python-shell-interpreter "ipython3"
+        python-shell-interpreter-args "-i --simple-prompt"))
+#+end_src
+
+* Rust
+Mostly making rustic buffers to my taste
+
+#+begin_src emacs-lisp
+(after! rustic
+(set-popup-rule! "*rustic-compilation*" :ignore nil :actions: nil :side 'right :width 0.4 :quit 'current :select t :slot -1)
+(set-popup-rule! "*cargo-run*" :ignore nil :actions: nil :side 'right :width 0.4 :quit 'current :select t :slot -1)
+(set-popup-rule! "*cargo-build*" :ignore nil :actions: nil :side 'right :width 0.4 :quit 'current :select t :slot -1)
+(set-popup-rule! "*cargo-test*" :ignore nil :actions: nil :side 'right :width 0.4 :quit 'current :select t :slot -1)
+(set-popup-rule! "*cargo-clippy*" :ignore nil :actions: nil :side 'right :width 0.4 :quit 'current :select t :slot -1)
+)
+#+end_src
+
+
+* Wakatime
+If I live 3 times longer than @sunsided, maybe I can catch up
+
+#+begin_src emacs-lisp
+(use-package! wakatime-mode
+  :config
+  (global-wakatime-mode))
+#+end_src
+
+* Dashboard
+
+Just setting a dashboard image
+
+#+begin_src emacs-lisp
+(setq fancy-splash-image (concat doom-private-dir "banners/banner.svg"))
+#+end_src
