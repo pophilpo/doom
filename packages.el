@@ -50,4 +50,5 @@
                                         ;(unpin! t)
 
 (package! wakatime-mode)
+(package! clippy)
 (package! kaolin-themes)

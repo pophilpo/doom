@@ -11,6 +11,7 @@
 - [[#rust][Rust]]
 - [[#wakatime][Wakatime]]
 - [[#dashboard][Dashboard]]
+- [[#clippy][Clippy]]
 
 * Apperance
 Adjusting theme, fonts and other utils.
@@ -111,4 +112,13 @@ Just setting a dashboard image
 
 #+begin_src emacs-lisp
 (setq fancy-splash-image (concat doom-private-dir "banners/banner.svg"))
+#+end_src
+
+* Clippy
+
+#+begin_src emacs-lisp
+(map! :leader
+      (:prefix ("c h" . "Help info from Clippy")
+       :desc "Clippy describes function under point" "f" #'clippy-describe-function
+       :desc "Clippy describes variable under point" "v" #'clippy-describe-variable))
 #+end_src
