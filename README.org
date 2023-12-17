@@ -3,6 +3,7 @@
 #+DESCRIPTION: Personal DoomEmacs config
 #+STARTUP: showeverything
 
+***
 
 * Table of contents :toc:
 - [[#apperance][Apperance]]
@@ -11,18 +12,18 @@
 - [[#rust][Rust]]
 - [[#wakatime][Wakatime]]
 - [[#dashboard][Dashboard]]
+- [[#clippy][Clippy]]
 
 * Apperance
 Adjusting theme, fonts and other utils.
 
 #+begin_src emacs-lisp
-(setq doom-theme 'doom-peacock)
+(setq doom-theme 'doom-fairy-floss)
 (setq display-line-numbers-type 'relative)
 (setq doom-font (font-spec :family "UbuntuMono" :size 25 :weight 'medium))
 (setq org-pretty-entities t)
 #+end_src
 
-#+RESULTS:
 * Keybindings
 Most of the keybindings I use are default ones, but there are some exceptions.
 
@@ -98,7 +99,7 @@ Mostly making rustic buffers to my taste
 
 
 * Wakatime
-If I live 3 times longer than [[https://github.com/sunsided][@sunsided]], maybe I can catch up
+If I live 3 times longer than @sunsided, maybe I can catch up
 
 #+begin_src emacs-lisp
 (use-package! wakatime-mode
@@ -112,4 +113,13 @@ Just setting a dashboard image
 
 #+begin_src emacs-lisp
 (setq fancy-splash-image (concat doom-private-dir "banners/banner.svg"))
+#+end_src
+
+* Clippy
+
+#+begin_src emacs-lisp
+(map! :leader
+      (:prefix ("c h" . "Help info from Clippy")
+       :desc "Clippy describes function under point" "f" #'clippy-describe-function
+       :desc "Clippy describes variable under point" "v" #'clippy-describe-variable))
 #+end_src
