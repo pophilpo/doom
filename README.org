@@ -13,6 +13,7 @@
 - [[#wakatime][Wakatime]]
 - [[#dashboard][Dashboard]]
 - [[#clippy][Clippy]]
+- [[#cursor][Cursor]]
 
 * Apperance
 Adjusting theme, fonts and other utils.
@@ -122,4 +123,12 @@ Just setting a dashboard image
       (:prefix ("c h" . "Help info from Clippy")
        :desc "Clippy describes function under point" "f" #'clippy-describe-function
        :desc "Clippy describes variable under point" "v" #'clippy-describe-variable))
+#+end_src
+
+* Cursor
+
+#+begin_src emacs-lisp
+(setq evil-normal-state-cursor '(box "light blue")
+      evil-insert-state-cursor '(box "medium sea green")
+      evil-visual-state-cursor '(hollow "orange"))
 #+end_src
