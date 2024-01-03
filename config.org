@@ -14,14 +14,15 @@
 - [[#dashboard][Dashboard]]
 - [[#clippy][Clippy]]
 - [[#cursor][Cursor]]
+- [[#moonlander-layout][Moonlander Layout]]
 
 * Apperance
 Adjusting theme, fonts and other utils.
 
 #+begin_src emacs-lisp
-(setq doom-theme 'doom-fairy-floss)
+(setq doom-theme 'doom-nord)
 (setq display-line-numbers-type 'relative)
-(setq doom-font (font-spec :family "UbuntuMono" :size 25 :weight 'medium))
+(setq doom-font (font-spec :family "Iosevka" :size 25 :weight 'medium))
 (setq org-pretty-entities t)
 #+end_src
 
@@ -39,6 +40,7 @@ Most of the keybindings I use are default ones, but there are some exceptions.
 | window-up                 | /Select window up/                      | CTRL-k     |
 | window-left               | /Select window left/                    | CTRL-l     |
 | window-right              | /Select window right/                   | CTRL-r     |
+| show-moonlander-layout    | /Open keyboard layout/                  | SPC k h    |
 
 #+begin_src emacs-lisp
 (map! :leader
@@ -131,4 +133,19 @@ Just setting a dashboard image
 (setq evil-normal-state-cursor '(box "light blue")
       evil-insert-state-cursor '(box "medium sea green")
       evil-visual-state-cursor '(hollow "orange"))
+#+end_src
+
+
+* Moonlander Layout
+#+begin_src emacs-lisp
+(defun show-moonlander-layout()
+  "Display my current moonlander keyboard layout"
+  (interactive)
+  (find-file-read-only-other-window "/home/philipp/Pictures/util/moonlander_layout.png")
+  )
+(set-popup-rule! "^moonlander-layout\\.jpg$" :ignore nil :actions nil :quit 'current :select t)
+
+(map! :leader
+      (:prefix ("k" . "Keyboard")
+       :desc "Show Moonlander Layout" "h" #'show-moonlander-layout))
 #+end_src

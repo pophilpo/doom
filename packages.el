@@ -52,3 +52,4 @@
 (package! wakatime-mode)
 (package! clippy)
 (package! kaolin-themes)
+(package! zenburn-theme)
