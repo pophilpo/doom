@@ -3,8 +3,6 @@
 #+DESCRIPTION: Personal DoomEmacs config
 #+STARTUP: showeverything
 
-***
-
 * Table of contents :toc:
 - [[#apperance][Apperance]]
 - [[#keybindings][Keybindings]]
