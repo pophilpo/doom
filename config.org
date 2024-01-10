@@ -18,7 +18,7 @@
 Adjusting theme, fonts and other utils.
 
 #+begin_src emacs-lisp
-(setq doom-theme 'doom-nord)
+(setq doom-theme 'modus-vivendi-tinted)
 (setq display-line-numbers-type 'relative)
 (setq doom-font (font-spec :family "Iosevka" :size 25 :weight 'medium))
 (setq org-pretty-entities t)
