@@ -53,3 +53,5 @@
 (package! clippy)
 (package! kaolin-themes)
 (package! zenburn-theme)
+(package! modus-themes)
+(package! nushell-mode :recipe (:host github :repo "mrkkrp/nushell-mode"))
